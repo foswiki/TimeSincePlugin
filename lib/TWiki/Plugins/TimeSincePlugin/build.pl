@@ -8,10 +8,10 @@ BEGIN {
   }
 }
 
-use TWiki::Contrib::Build;
+use Foswiki::Contrib::Build;
 
 # Create the build object
-$build = new TWiki::Contrib::Build( 'TimeSincePlugin' );
+$build = new Foswiki::Contrib::Build( 'TimeSincePlugin' );
 
 # Build the target on the command line, or the default target
 $build->build($build->{target});
