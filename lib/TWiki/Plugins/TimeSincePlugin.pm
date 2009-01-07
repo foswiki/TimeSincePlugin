@@ -1,6 +1,6 @@
 # Plugin for Foswiki - The Free and Open Source Wiki, http://foswiki.org/
 #
-# Copyright (C) 2005-2008 Michael Daum http://michaeldaumconsulting.com
+# Copyright (C) 2005-2009 Michael Daum http://michaeldaumconsulting.com
 # 
 # Adapted from WordPress plugin TimeSince by
 # Michael Heilemann (http://binarybonsai.com), 

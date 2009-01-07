@@ -13,10 +13,17 @@
 This plugin is inspired by the <nop>WordPress <nop>TimeSince plugin.
 It which can be used to display a time difference in a human readable way, for instance to tell you that a topic has been published "2 days, 3 hours ago".
 
-There are some problems with the original [[http://binarybonsai.com/wordpress/time-since][TimeSince plugin for WordPress]]. For example, it was only able to display a time diff with at most two expressions: "1day, 2hours ago" or "1 week ago" but not "1 day, 2 hours and 3 minutes".
-It even displays only one time expression if the difference does not occure in two adjacent time units (time units are year, month, week, day, hour, minute). 
-If a time interval differs in week and hour the <nop>TimeSince WP plugin will only display the week difference and not the hours as week and hour are not adjacent. This is fixed in the TimeSincePlugin for TWiki. Several other parameters have been added
-to give a finer control of the format and the information displayed.
+There are some problems with the original
+[[http://binarybonsai.com/wordpress/time-since][TimeSince plugin for WordPress]]. 
+For example, it was only able to display a time diff with at most
+two expressions: "1day, 2hours ago" or "1 week ago" but not "1 day, 2 hours and
+3 minutes".  It even displays only one time expression if the difference does
+not occure in two adjacent time units (time units are year, month, week, day,
+hour, minute).  If a time interval differs in week and hour the <nop>TimeSince
+WP plugin will only display the week difference and not the hours as week and
+hour are not adjacent. This is fixed in the TimeSincePlugin for Foswiki. Several
+other parameters have been added to give a finer control of the format and the
+information displayed.
 
 %TOC%
 
@@ -57,7 +64,7 @@ For a further explanation/excuse, read
 [[http://search.cpan.org/~drolsky/DateTime-0.4304/lib/DateTime.pm#How_Datetime_Math_is_Done][how datetime math is done]].
 
 Time expressions can be specified in any of the following format:
-   * 31 Dec 2001 - 23:59 (TWiki date)
+   * 31 Dec 2001 - 23:59 (Foswiki date)
    * 31 Dec 2001
    * 2001/12/31 23:59:59 (RCS date) %BR%
      also =-=, =.= instead of =/= in date, also =.= instead =:= in time
@@ -91,21 +98,19 @@ Format strings may contain the following:
 
 ---++ Plugin Installation Instructions
 
-   * [[http://twiki.org/p/pub/Plugins/%TOPIC%/%TOPIC%.zip][Download]] the ZIP file
+   * Download the ZIP file
    * Unzip it in your twiki installation directory. Content: 
      | *File:* | *Description:* |
-     | ==data/TWiki/%TOPIC%.txt== | plugin topic |
-     | ==lib/Foswiki/Plugins/%TOPIC%.pm== | plugin perl module |
-     | ==lib/Foswiki/Plugins/%TOPIC%/Core.pm== | plugin core |
-   * (Dakar) Visit =configure= in your TWiki installation, and enable the plugin in the {Plugins} section.
+%$MANIFEST%
+   * Visit =configure= in your installation, and enable the plugin in the {Plugins} section.
 
 ---++ Plugin Info
 <!-- provided for compatibility only
    * Set SHORTDESCRIPTION = Display time difference in a human readable way
 -->
 
-|  Plugin Author: | TWiki:Main.MichaelDaum |
-|  Copyright &copy;: | 2005-2008, Michael Daum http://michaeldaumconsulting.com |
+|  Plugin Author: | Michael Daum |
+|  Copyright &copy;: | 2005-2009, Michael Daum http://michaeldaumconsulting.com |
 |  License: | GPL ([[http://www.gnu.org/copyleft/gpl.html][GNU General Public License]]) |
 |  Plugin Version: | v2.00 |
 |  Change History: | <!-- versions below in reverse order -->&nbsp; |
@@ -115,13 +120,9 @@ Format strings may contain the following:
 |  31 Aug 2006: | added NO_PREFS_IN_TOPIC |
 |  27 Apr 2006: | added lazy compilation |
 |  11 Nov 2005: | Initial version |
-|  TWiki Dependency: | $TWiki::Plugins::VERSION 1.1 |
+|  Dependency: | $Foswiki::Plugins::VERSION 1.1 |
 |  CPAN Dependencies: | CPAN:DateTime |
 |  Other Dependencies: | none |
 |  Perl Version: | 5.005 |
-|  [[Foswiki:Extensions/Benchmark][Benchmarks]]: | %SYSTEMWEB%.GoodStyle nn%, %SYSTEMWEB%.FormattedSearch nn%, %TOPIC% nn% |
 |  Plugin Home: | Foswiki:Extensions/%TOPIC% |
 |  Feedback: | Foswiki:Extensions/%TOPIC%Dev |
-|  Appraisal: | Foswiki:Extensions/%TOPIC%Appraisal |
-
--- TWiki:Main.MichaelDaum - 13 Aug 2008

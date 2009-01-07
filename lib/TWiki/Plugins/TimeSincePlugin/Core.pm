@@ -1,6 +1,6 @@
 # Plugin for Foswiki - The Free and Open Source Wiki, http://foswiki.org/
 #
-# Copyright (C) 2005-2008 Michael Daum http://michaeldaumconsulting.com
+# Copyright (C) 2005-2009 Michael Daum http://michaeldaumconsulting.com
 # 
 # Adapted from WordPress plugin TimeSince by
 # Michael Heilemann (http://binarybonsai.com), 
@@ -72,7 +72,7 @@ sub handleTimeSince {
 
   if ($theFrom eq '' && $theTo eq '') {
     # if there's no starting date then get the current revision date
-    my ($meta, undef) = &TWiki::Func::readTopic($theWeb, $theTopic);
+    my ($meta, undef) = TWiki::Func::readTopic($theWeb, $theTopic);
     my ($epoch) = $meta->getRevisionInfo();
     $theFrom = DateTime->from_epoch(epoch=>$epoch);
     $theTo = parseTime();
