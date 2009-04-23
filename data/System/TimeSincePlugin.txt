@@ -97,12 +97,7 @@ Format strings may contain the following:
 
 
 ---++ Plugin Installation Instructions
-
-   * Download the ZIP file
-   * Unzip it in your twiki installation directory. Content: 
-     | *File:* | *Description:* |
-%$MANIFEST%
-   * Visit =configure= in your installation, and enable the plugin in the {Plugins} section.
+%$INSTALL_INSTRUCTIONS%
 
 ---++ Plugin Info
 <!-- provided for compatibility only
@@ -112,8 +107,9 @@ Format strings may contain the following:
 |  Plugin Author: | Michael Daum |
 |  Copyright &copy;: | 2005-2009, Michael Daum http://michaeldaumconsulting.com |
 |  License: | GPL ([[http://www.gnu.org/copyleft/gpl.html][GNU General Public License]]) |
-|  Plugin Version: | v2.00 |
+|  Plugin Version: | v3.00 |
 |  Change History: | <!-- versions below in reverse order -->&nbsp; |
+|  23 Apr 2009: | converted to foswiki plugin |
 |  13 Aug 2008: | replaced CPAN:Time::Local with much more powerful and more precise CPAN:DateTime |
 |  03 Jan 2008: | improved parsing time formats |
 |  13 Oct 2006: | added =negformat= parameter |
@@ -125,4 +121,4 @@ Format strings may contain the following:
 |  Other Dependencies: | none |
 |  Perl Version: | 5.005 |
 |  Plugin Home: | Foswiki:Extensions/%TOPIC% |
-|  Feedback: | Foswiki:Extensions/%TOPIC%Dev |
+|  Support: | Foswiki:Support/%TOPIC% |

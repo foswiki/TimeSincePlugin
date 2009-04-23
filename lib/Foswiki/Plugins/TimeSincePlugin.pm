@@ -19,7 +19,7 @@
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 
-package TWiki::Plugins::TimeSincePlugin;
+package Foswiki::Plugins::TimeSincePlugin;
 
 use strict;
 use vars qw( 
@@ -28,18 +28,18 @@ use vars qw(
 );
 
 $VERSION = '$Rev$';
-$RELEASE = '2.00';
+$RELEASE = '3.00';
 $NO_PREFS_IN_TOPIC = 1;
 $SHORTSUMMARY = 'Display time difference in a human readable way';
 
 ###############################################################################
 sub initPlugin {
 
-  if ($TWiki::Plugins::VERSION < 1.1) {
+  if ($Foswiki::Plugins::VERSION < 1.1) {
     return 0;
   }
 
-  TWiki::Func::registerTagHandler('TIMESINCE', \&handleTimeSince);
+  Foswiki::Func::registerTagHandler('TIMESINCE', \&handleTimeSince);
   return 1;
 }
 
@@ -47,12 +47,11 @@ sub initPlugin {
 sub handleTimeSince {
 
   unless ($isInitialized) {
-    eval 'use TWiki::Plugins::TimeSincePlugin::Core;';
-    die $@ if $@;
+    require Foswiki::Plugins::TimeSincePlugin::Core;
     $isInitialized = 1;
   }
 
-  return TWiki::Plugins::TimeSincePlugin::Core::handleTimeSince(@_);
+  return Foswiki::Plugins::TimeSincePlugin::Core::handleTimeSince(@_);
 }
 
 1;

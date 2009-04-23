@@ -19,7 +19,7 @@
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 
-package TWiki::Plugins::TimeSincePlugin::Core;
+package Foswiki::Plugins::TimeSincePlugin::Core;
 
 use DateTime;
 use strict;
@@ -46,12 +46,11 @@ sub writeDebug {
   print STDERR "TimeSincePlugin - $_[0]\n" if DEBUG
 }
 
-
 ###############################################################################
 sub handleTimeSince {
   my ($session, $params, $theTopic, $theWeb) = @_;
 
-  writeDebug("handleTimeSince(" . $params->stringify() . ") called");
+  #writeDebug("handleTimeSince(" . $params->stringify() . ") called");
 
   my $theFrom = $params->{_DEFAULT} || $params->{from} || '';
   my $theTo = $params->{to} || '';
@@ -72,9 +71,8 @@ sub handleTimeSince {
 
   if ($theFrom eq '' && $theTo eq '') {
     # if there's no starting date then get the current revision date
-    my ($meta, undef) = TWiki::Func::readTopic($theWeb, $theTopic);
-    my ($epoch) = $meta->getRevisionInfo();
-    $theFrom = DateTime->from_epoch(epoch=>$epoch);
+    my ($date) = Foswiki::Func::getRevisionInfo($theWeb, $theTopic);
+    $theFrom = DateTime->from_epoch(epoch=>$date);
     $theTo = parseTime();
   } else {
 
@@ -123,7 +121,7 @@ sub handleTimeSince {
     }
   }
 
-  writeDebug("theFrom=$theFrom, theTo=$theTo");
+  #writeDebug("theFrom=$theFrom, theTo=$theTo");
 
   my $since = $theTo - $theFrom;
   my $isNeg = $since->is_negative;
@@ -162,10 +160,10 @@ sub handleTimeSince {
       $index++;
       last if $index >= $theUnits;
     } 
-    writeDebug("unit=$unit, count=$count, timestring=$timeString");
+    #writeDebug("unit=$unit, count=$count, timestring=$timeString");
   };
 
-  writeDebug("timeString=$timeString");
+  #writeDebug("timeString=$timeString");
 
   if ($timeString eq '') {
     return expandVariables($theNull);
@@ -194,7 +192,7 @@ sub parseTime {
     # NOTE: This routine *will break* if input is not one of below formats!
     
     # FIXME - why aren't ifs around pattern match rather than $5 etc
-    # try "31 Dec 2001 - 23:59:11"  (TWiki date)
+    # try "31 Dec 2001 - 23:59:11"  (Foswiki date)
     if ($date =~ /(\d+)\s+([A-Za-z]+)\s+(\d\d\d\d)[\s\-]+(\d+)\:(\d+)(?:\:(\d+))?/) {
         my $year = $3;
         my $seconds = $6 || 0;
@@ -343,7 +341,7 @@ sub parseTime {
 
 ###############################################################################
 sub inlineError {
-  return '<span class="twikiAlert">' . $_[0] . '</span>' ;
+  return '<span class="foswikiAlert">' . $_[0] . '</span>' ;
 }
 
 ###############################################################################

@@ -1,0 +1,3 @@
+data/System/TimeSincePlugin.txt 0644
+lib/Foswiki/Plugins/TimeSincePlugin.pm 0644
+lib/Foswiki/Plugins/TimeSincePlugin/Core.pm 0644
