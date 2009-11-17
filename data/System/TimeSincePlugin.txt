@@ -107,7 +107,8 @@ Format strings may contain the following:
 |  Plugin Author: | Michael Daum |
 |  Copyright &copy;: | 2005-2009, Michael Daum http://michaeldaumconsulting.com |
 |  License: | GPL ([[http://www.gnu.org/copyleft/gpl.html][GNU General Public License]]) |
-|  Plugin Version: | v3.00 |
+|  Release: | %$RELEASE% |
+|  Version: | %$VERSION% |
 |  Change History: | <!-- versions below in reverse order -->&nbsp; |
 |  23 Apr 2009: | converted to foswiki plugin |
 |  13 Aug 2008: | replaced CPAN:Time::Local with much more powerful and more precise CPAN:DateTime |
