@@ -1,12 +1,12 @@
 # Plugin for Foswiki - The Free and Open Source Wiki, http://foswiki.org/
 #
 # Copyright (C) 2005-2009 Michael Daum http://michaeldaumconsulting.com
-# 
+#
 # Adapted from WordPress plugin TimeSince by
-# Michael Heilemann (http://binarybonsai.com), 
+# Michael Heilemann (http://binarybonsai.com),
 # Dunstan Orchard (http://www.1976design.com/blog/archive/2004/07/23/redesign-time-presentation/),
 # Nataile Downe (http://blog.natbat.co.uk/archive/2003/Jun/14/time_since)
-# 
+#
 # Thanks to all of you!!!
 #
 # This program is free software; you can redistribute it and/or
@@ -22,36 +22,36 @@
 package Foswiki::Plugins::TimeSincePlugin;
 
 use strict;
-use vars qw( 
+use vars qw(
   $VERSION $RELEASE $NO_PREFS_IN_TOPIC $SHORTSUMMARY
   $isInitialized
 );
 
-$VERSION = '$Rev$';
-$RELEASE = '3.00';
+$VERSION           = '$Rev$';
+$RELEASE           = '3.00';
 $NO_PREFS_IN_TOPIC = 1;
-$SHORTSUMMARY = 'Display time difference in a human readable way';
+$SHORTSUMMARY      = 'Display time difference in a human readable way';
 
 ###############################################################################
 sub initPlugin {
 
-  if ($Foswiki::Plugins::VERSION < 1.1) {
-    return 0;
-  }
+    if ( $Foswiki::Plugins::VERSION < 1.1 ) {
+        return 0;
+    }
 
-  Foswiki::Func::registerTagHandler('TIMESINCE', \&handleTimeSince);
-  return 1;
+    Foswiki::Func::registerTagHandler( 'TIMESINCE', \&handleTimeSince );
+    return 1;
 }
 
 ###############################################################################
 sub handleTimeSince {
 
-  unless ($isInitialized) {
-    require Foswiki::Plugins::TimeSincePlugin::Core;
-    $isInitialized = 1;
-  }
+    unless ($isInitialized) {
+        require Foswiki::Plugins::TimeSincePlugin::Core;
+        $isInitialized = 1;
+    }
 
-  return Foswiki::Plugins::TimeSincePlugin::Core::handleTimeSince(@_);
+    return Foswiki::Plugins::TimeSincePlugin::Core::handleTimeSince(@_);
 }
 
 1;
