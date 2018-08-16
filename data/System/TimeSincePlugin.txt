@@ -73,6 +73,7 @@ Format strings may contain the following:
 %$DEPENDENCIES%
 
 ---++ Change History
+|  16 Aug 2018: | oo-ified core; fixed arithmetics |
 |  17 Nov 2014: | fixed duration math by removing dependency on CPAN::DateTime; improved units parameter |
 |  23 Apr 2009: | converted to Foswiki plugin |
 |  13 Aug 2008: | replaced CPAN:Time::Local with much more powerful and more precise CPAN:DateTime |
