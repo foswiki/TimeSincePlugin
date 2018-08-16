@@ -1,7 +1,7 @@
 # Plugin for Foswiki - The Free and Open Source Wiki, http://foswiki.org/
 #
-# Copyright (C) 2005-2014 Michael Daum http://michaeldaumconsulting.com
-# 
+# Copyright (C) 2005-2018 Michael Daum http://michaeldaumconsulting.com
+#
 # This program is free software; you can redistribute it and/or
 # modify it under the terms of the GNU General Public License
 # as published by the Free Software Foundation; either version 2
@@ -17,28 +17,37 @@ package Foswiki::Plugins::TimeSincePlugin;
 use strict;
 use warnings;
 
-our $VERSION = '4.00';
-our $RELEASE = '4.00';
+our $VERSION = '4.10';
+our $RELEASE = '16 Aug 2018';
 our $NO_PREFS_IN_TOPIC = 1;
 our $SHORTSUMMARY = 'Display time difference in a human readable way';
-our $isInitialized;
+our $core;
 
-###############################################################################
 sub initPlugin {
 
-  Foswiki::Func::registerTagHandler('TIMESINCE', \&handleTimeSince);
+  Foswiki::Func::registerTagHandler(
+    'TIMESINCE',
+    sub {
+      return getCore(shift)->handleTimeSince(@_);
+    }
+  );
+
   return 1;
 }
 
-###############################################################################
-sub handleTimeSince {
-
-  unless ($isInitialized) {
+sub getCore {
+  unless (defined $core) {
     require Foswiki::Plugins::TimeSincePlugin::Core;
-    $isInitialized = 1;
+    $core = new Foswiki::Plugins::TimeSincePlugin::Core();
   }
 
-  return Foswiki::Plugins::TimeSincePlugin::Core::handleTimeSince(@_);
+  return $core;
+}
+
+sub finishPlugin {
+  if (defined $core) {
+    undef $core;
+  }
 }
 
 1;

@@ -1,6 +1,6 @@
 # Plugin for Foswiki - The Free and Open Source Wiki, http://foswiki.org/
 #
-# Copyright (C) 2005-2014 Michael Daum http://michaeldaumconsulting.com
+# Copyright (C) 2005-2018 Michael Daum http://michaeldaumconsulting.com
 #
 # This program is free software; you can redistribute it and/or
 # modify it under the terms of the GNU General Public License
@@ -19,28 +19,40 @@ use warnings;
 
 use Foswiki::Func ();
 use Foswiki::Time();
+use Foswiki::Plugins ();
 use POSIX;
 
 use constant TRACE => 0;    # toggle me
 
-our %SECONDSOFUNIT = (
-  years   => 31536000,
-  months  => 2628000,
-  weeks   => 604800,
-  days    => 86400,
-  hours   => 3600,
-  minutes => 60,
-  seconds => 1,
-);
+sub new {
+  my $class = shift;
+  my $session = shift;
 
-###############################################################################
-sub writeDebug {
-  print STDERR "TimeSincePlugin - $_[0]\n" if TRACE;
+  $session ||= $Foswiki::Plugins::SESSION;
+
+  my $this = bless({@_}, $class);
+
+  $this->{_secondsOfUnit} = {
+    years => 60 * 60 * 24 * 365.2425,
+    months => 2628000,
+    weeks => 60 * 60 * 24 * 7,
+    days => 60 * 60 * 24,
+    hours => 60 * 60,
+    minutes => 60,
+    seconds => 1,
+  };
+
+  return $this;
 }
 
-###############################################################################
+sub secondsOfUnit {
+  my ($this, $unit) = @_;
+
+  return $this->{_secondsOfUnit}{$unit};
+}
+
 sub handleTimeSince {
-  my ($session, $params, $topic, $web) = @_;
+  my ($this, $params, $topic, $web) = @_;
 
   #writeDebug("handleTimeSince(" . $params->stringify() . ") called");
 
@@ -56,7 +68,7 @@ sub handleTimeSince {
 
   if ($theUnits =~ /^(\d+)$/) {
     $numUnits = $1;
-  
+
     $doUnit{seconds} = Foswiki::Func::isTrue($params->{seconds}, 0);
     $doUnit{minutes} = Foswiki::Func::isTrue($params->{minutes}, 1);
     $doUnit{hours} = Foswiki::Func::isTrue($params->{hours}, 1);
@@ -65,9 +77,8 @@ sub handleTimeSince {
     $doUnit{months} = Foswiki::Func::isTrue($params->{months}, 1);
     $doUnit{years} = Foswiki::Func::isTrue($params->{years}, 1);
   } else {
-    %doUnit = map {$_ => 1} split(/\s*,\s*/, $theUnits);
+    %doUnit = map { $_ => 1 } split(/\s*,\s*/, $theUnits);
   }
-    
 
   my $theAbs = Foswiki::Func::isTrue($params->{abs}, 0);
   my $theNull = $params->{null} || 'about now';
@@ -111,13 +122,13 @@ sub handleTimeSince {
   foreach my $unit (qw(years months weeks days hours minutes seconds)) {
     next unless $doUnit{$unit};
 
-    my $factor = $SECONDSOFUNIT{$unit};
+    my $factor = $this->secondsOfUnit($unit);
     my $count = floor($duration / $factor);
     writeDebug("duration=$duration, unit=$unit, seconds in $unit=$factor, count=$count");
 
     if ($count) {
       my $label = $unit;
-      $label =~ s/s$//go if $count == 1; # TODO use maketext
+      $label =~ s/s$//go if $count == 1;    # TODO use maketext
       push @result, "$count $label";
 
       $index++;
@@ -146,9 +157,12 @@ sub handleTimeSince {
   return Foswiki::Func::decodeFormatTokens($result);
 }
 
-###############################################################################
 sub inlineError {
   return '<div class="foswikiAlert">' . $_[0] . '</div>';
+}
+
+sub writeDebug {
+  print STDERR "TimeSincePlugin - $_[0]\n" if TRACE;
 }
 
 1;

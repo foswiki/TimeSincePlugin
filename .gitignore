@@ -1,8 +1,8 @@
 *.swp
-TimeSincePlugin.md5
-TimeSincePlugin.sha1
-TimeSincePlugin.tgz
-TimeSincePlugin.txt
-TimeSincePlugin.zip
-TimeSincePlugin_installer
-TimeSincePlugin_installer.pl
+/TimeSincePlugin.md5
+/TimeSincePlugin.sha1
+/TimeSincePlugin.tgz
+/TimeSincePlugin.txt
+/TimeSincePlugin.zip
+/TimeSincePlugin_installer
+/TimeSincePlugin_installer.pl
